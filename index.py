@@ -12,11 +12,10 @@ def day():  ##Порядковый номер дня недели-сегодня
     dt_string = dt_obj.strftime("%w")
     return dt_string        
 
-
 text=[1,1,
       1,1,]
 for i in range(4):
-    text[i] = [f'{i}']*7   ## пустой массив 4х7
+    text[i] = [f'{i}']*7   # type: ignore ## пустой массив 4х7
     
     
        
@@ -26,7 +25,7 @@ pprint.pprint(text)
 def rd(i):          ##Чтение расписания из файлов и заполненние массива
     for j in range(7):
         f = open(f'{j+1}.txt','r', encoding="utf-8")
-        text[i][j]=f.read()
+        text[i][j]=f.read()  # type: ignore
         ##print(f'i={i} j={j} file={text[i][j]}')
         f.close()
 
@@ -40,7 +39,7 @@ os.chdir("C:\\Users\\SaMuRaI\\Desktop\\tg_rasp\\data\\22")
 rd(3)
 
 pprint.pprint(text)
-group=-1
+group = -1
 
 
 @bot.message_handler(commands=['start'])            ##start и инициализация кнопок под сообщением
@@ -59,29 +58,35 @@ def start_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)     ##присвоение группы 
 def callback_worker(call):
+    global group 
     if call.data == "1-1":
-        bot.send_message(call.message.chat.id, f'{os.getcwd()}')
+        bot.send_message(call.message.chat.id, f'ок, ты в {call.data}')
         print(f"Группа ИС1.1, id={call.message.chat.username}")
         group=0
     elif call.data == "1-2":
-        bot.send_message(call.message.chat.id, f'{os.getcwd()}')
+        bot.send_message(call.message.chat.id, f'ок, ты в {call.data}')
         print(f"Группа ИС1.2, id={call.message.chat.username}")
         group=1
     elif call.data == "2-1": 
-        bot.send_message(call.message.chat.id, f'{os.getcwd()}')
+        bot.send_message(call.message.chat.id, f'ок, ты в {call.data}')
         print(f"Группа ИС2.1, id={call.message.chat.username}")
         group=2
     elif call.data == "2-2": 
-        bot.send_message(call.message.chat.id, f'{os.getcwd()}')
+        bot.send_message(call.message.chat.id, f'ок, ты в {call.data}')
         print(f"Группа ИС2.2, id={call.message.chat.username}")
         group=3
+
+
 
 @bot.message_handler(commands=['today'])
 def today(commands):
     if group==-1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
-    print('nice')
-    bot.send_message(commands.from_user.id, 'nice')
+    else:
+        print('nice')
+        raspisanie=text[group][int(day())-1]  # type: ignore
+
+        bot.send_message(commands.from_user.id, f'nice\n{raspisanie}')
 
 
 

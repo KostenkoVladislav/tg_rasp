@@ -1,4 +1,5 @@
 from email.mime import message
+from tracemalloc import start
 import telebot
 import os
 import datetime
@@ -7,10 +8,17 @@ from telebot import types
 bot = telebot.TeleBot('5688159206:AAFxbhxdHY9WUiX3q424abv_pOLwK-bgTvY')
 print('ok')
 
+Migalka = 0  ## 1- числитель
+             ## 0- знаменатель
+
 def day():  ##Порядковый номер дня недели-сегодня
+    global Migalka
     dt_obj =datetime.datetime.now()
     dt_string = dt_obj.strftime("%w")
+    Migalka= datetime.datetime.now().isocalendar().week % 2
     return dt_string        
+
+day()
 
 text=[1,1,
       1,1,]
@@ -20,7 +28,7 @@ for i in range(4):
     
        
     
-pprint.pprint(text)
+##pprint.pprint(text)
 
 def rd(i):          ##Чтение расписания из файлов и заполненние массива
     for j in range(7):
@@ -38,7 +46,7 @@ rd(2)
 os.chdir("C:\\Users\\SaMuRaI\\Desktop\\tg_rasp\\data\\22")
 rd(3)
 
-pprint.pprint(text)
+##pprint.pprint(text)
 group = -1
 
 
@@ -83,12 +91,39 @@ def today(commands):
     if group==-1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
-        print('nice')
+        print("today")
         raspisanie=text[group][int(day())-1]  # type: ignore
+        bot.send_message(commands.from_user.id, f'nice\n{raspisanie}')
+
+@bot.message_handler(commands=['tomorrow'])
+def tomorrow(commands):
+    if group==-1:
+        bot.send_message(commands.from_user.id, 'Запусти команду /start')
+    else:
+        print("tomorrow")
+        raspisanie=text[group][int(day())]  # type: ignore
 
         bot.send_message(commands.from_user.id, f'nice\n{raspisanie}')
 
+@bot.message_handler(commands=['change'])
+def change(message):
+    ##bot.send_message(message.from_user.id, )
+    keyboard = types.InlineKeyboardMarkup(); #наша клавиатура
+    key_1_1 = types.InlineKeyboardButton(text='1-1', callback_data='1-1') 
+    keyboard.add(key_1_1); #добавляем кнопку в клавиатуру
+    key_1_2 = types.InlineKeyboardButton(text='1-2', callback_data='1-2')
+    keyboard.add(key_1_2)
+    key_2_1 = types.InlineKeyboardButton(text='2-1', callback_data='2-1')
+    keyboard.add(key_2_1); #добавляем кнопку в клавиатуру
+    key_2_2 = types.InlineKeyboardButton(text='2-2', callback_data='2-2')
+    keyboard.add(key_2_2)        
+    bot.send_message(message.from_user.id,'В какой ты группе ИСов?', reply_markup=keyboard)
 
+    
+   
+
+
+   
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):

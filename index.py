@@ -7,6 +7,7 @@ bot = telebot.TeleBot('5688159206:AAFxbhxdHY9WUiX3q424abv_pOLwK-bgTvY')
 pprint.pprint('ok')
 
 Migalka = 0  # 1- числитель
+group = -1
 
 
 # 0- знаменатель
@@ -21,25 +22,33 @@ def day():
 
 day()
 
-text = [1, 1,
+text0 = [1, 1,
+        1, 1, ]
+text1 = [1, 1,
         1, 1, ]
 for i in range(4):
-    text[i] = [f'{i}'] * 7  # type: ignore ## пустой массив 4х7
+    text0[i] = [f'{i}'] * 7  # type: ignore #   пустой массив 4х7
+    text1[i] = [f'{i}'] * 7  # type: ignore
 
 
 #   pprint.pprint(text)
     # Чтение расписания из файлов и заполненние массива
 for i in range(4):
-    fls=[11,12,21,22]
+    fls=[11, 12, 21, 22]
     for k in fls:
         for j in range(7):
             f = open(f'data/{k}/{j+1}.txt', 'r', encoding="utf-8")
-            text[i][j] = f.read()  # type: ignore
-            #   print(f'i={i} j={j} file={text[i][j]}')
+            text0[i][j] = f.read()  # type: ignore
+            print(f'i={i} j={j} file={text0[i][j]}')
+            f.close()
+
+            f = open(f'data/{k}/{j + 1}1.txt', 'r', encoding="utf-8")
+            text1[i][j] = f.read()  # type: ignore
+            print(f'i={i} j={j} file={text1[i][j]}')
             f.close()
 
 #   pprint.pprint(text)
-group = -1
+
 
 
 @bot.message_handler(commands=['start'])  # start и инициализация кнопок под сообщением
@@ -85,8 +94,12 @@ def today(commands):
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("today")
-        raspisanie = text[group][int(day()) - 1]  # type: ignore
-        bot.send_message(commands.from_user.id, f'nice\n{raspisanie}')
+        if Migalka == 0:
+            bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day()) - 1]}')
+            print(f'Group={group}')
+        else:
+            bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day()) - 1]}')
+            print(f'Group={group}')
 
 
 @bot.message_handler(commands=['tomorrow'])
@@ -95,10 +108,12 @@ def tomorrow(commands):
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("tomorrow")
-        raspisanie = text[group][int(day())]  # type: ignore
-
-        bot.send_message(commands.from_user.id, f'nice\n{raspisanie}')
-
+        if Migalka == 0:
+            bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day())]}')
+            print(f'Group={group}')
+        else:
+            bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day())]}')
+            print(f'Group={group}')
 
 @bot.message_handler(commands=['change'])
 def change(message):

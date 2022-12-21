@@ -103,10 +103,8 @@ def today(commands):
         print("today")
         if Migalka == 1:
             bot.send_message(commands.from_user.id, f'{text0[group][int(day()) - 1]}')
-            print(commands.from_user.id)
         else:
             bot.send_message(commands.from_user.id, f'{text1[group][int(day()) - 1]}')
-            print(commands.from_user.id)
 
 @bot.message_handler(commands=['week'])
 def today(commands):

@@ -9,6 +9,10 @@ pprint.pprint('ok')
 Migalka = 0  # 1- числитель
 group = -1
 
+def adm(id):
+    bot.send_message(759333833, f'Hey, new start user.\n Id= {id}')
+
+
 
 # 0- знаменатель
 #   Порядковый номер дня недели-сегодня
@@ -51,8 +55,10 @@ pprint.pprint(text1)
 
 
 @bot.message_handler(commands = ['start'])
+
 # start и инициализация кнопок под сообщением
 def start_message(message):
+    adm(message.chat.username)
     #   bot.send_message(message.from_user.id, )
     keyboard = types.InlineKeyboardMarkup()
     #  наша клавиатура
@@ -96,9 +102,11 @@ def today(commands):
     else:
         print("today")
         if Migalka == 1:
-            bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day()) - 1]}')
+            bot.send_message(commands.from_user.id, f'{text0[group][int(day()) - 1]}')
+            print(commands.from_user.id)
         else:
-            bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day()) - 1]}')
+            bot.send_message(commands.from_user.id, f'{text1[group][int(day()) - 1]}')
+            print(commands.from_user.id)
 
 @bot.message_handler(commands=['week'])
 def today(commands):
@@ -108,11 +116,23 @@ def today(commands):
         print("week")
         if Migalka == 1:
             for ii in range(7):
-                bot.send_message(commands.from_user.id, f'nice\n{text0[group][ii]}')
+                bot.send_message(commands.from_user.id, f'{text0[group][ii]}')
         else:
             for ii in range(7):
-                bot.send_message(commands.from_user.id, f'nice\n{text1[group][ii]}')
+                bot.send_message(commands.from_user.id, f'{text1[group][ii]}')
 
+@bot.message_handler(commands=['next_week'])
+def today(commands):
+    if group == -1:
+        bot.send_message(commands.from_user.id, 'Запусти команду /start')
+    else:
+        print("week")
+        if Migalka == 0:
+            for ii in range(7):
+                bot.send_message(commands.from_user.id, f'{text0[group][ii]}')
+        else:
+            for ii in range(7):
+                bot.send_message(commands.from_user.id, f'{text1[group][ii]}')
 
 @bot.message_handler(commands=['tomorrow'])
 def tomorrow(commands):

@@ -4,8 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd3ba0e-dccf-479e-a373-1b1e9dd10b27" name="Changes" comment="update pep8&#10;&#10;push migalka &#10;push txt files">
+    <list default="true" id="9dd3ba0e-dccf-479e-a373-1b1e9dd10b27" name="Changes" comment="release alpha 0.1&#10;&#10;function is working. &#10;Need to write text">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/11.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/21.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/21.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/31.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/31.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/41.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/41.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/51.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/51.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/6.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/61.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/61.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/7.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/11/71.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/71.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,11 +63,19 @@
       <option name="project" value="LOCAL" />
       <updated>1671560352819</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="release alpha 0.1&#10;&#10;function is working. &#10;Need to write text">
+      <created>1671606836590</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671606836590</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update pep8&#10;&#10;push migalka &#10;push txt files" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pep8&#10;&#10;push migalka &#10;push txt files" />
+    <MESSAGE value="release alpha 0.1&#10;&#10;function is working. &#10;Need to write text" />
+    <option name="LAST_COMMIT_MESSAGE" value="release alpha 0.1&#10;&#10;function is working. &#10;Need to write text" />
   </component>
 </project>

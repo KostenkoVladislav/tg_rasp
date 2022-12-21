@@ -33,28 +33,24 @@ for i in range(4):
 #   pprint.pprint(text)
 # Чтение расписания из файлов и заполненние массива
 fls = [11, 12, 21, 22]
-
-for k in fls:
+i = 0
+for i in range(4):
     for j in range(7):
-        f = open(f'data/{k}/{j + 1}.txt', 'r', encoding="utf-8")
+        f = open(f'data/{fls[i]}/{j + 1}.txt', 'r', encoding="utf-8")
         text0[i][j] = f.read()  # type: ignore
         #   print(f'i={i} j={j} file={text0[i][j]}')
         f.close()
-        f = open(f'data/{k}/{j + 1}1.txt', 'r', encoding="utf-8")
+        f = open(f'data/{fls[i]}/{j + 1}1.txt', 'r', encoding="utf-8")
         text1[i][j] = f.read()  # type: ignore
         #   print(f'i={i} j={j} file={text1[i][j]}')
         f.close()
 
-pprint.pprint(f'{text0}'
-              f''
-              f''
-              f''
-              f'')
+pprint.pprint(text0)
 pprint.pprint(text1)
 
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands = ['start'])
 # start и инициализация кнопок под сообщением
 def start_message(message):
     #   bot.send_message(message.from_user.id, )
@@ -99,12 +95,23 @@ def today(commands):
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("today")
-        if Migalka == 0:
+        if Migalka == 1:
             bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day()) - 1]}')
-            print(f'Group={group}')
         else:
             bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day()) - 1]}')
-            print(f'Group={group}')
+
+@bot.message_handler(commands=['week'])
+def today(commands):
+    if group == -1:
+        bot.send_message(commands.from_user.id, 'Запусти команду /start')
+    else:
+        print("week")
+        if Migalka == 1:
+            for ii in range(7):
+                bot.send_message(commands.from_user.id, f'nice\n{text0[group][ii]}')
+        else:
+            for ii in range(7):
+                bot.send_message(commands.from_user.id, f'nice\n{text1[group][ii]}')
 
 
 @bot.message_handler(commands=['tomorrow'])
@@ -113,13 +120,10 @@ def tomorrow(commands):
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("tomorrow")
-        if Migalka == 0:
+        if Migalka == 1:
             bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day())]}')
-            print(f'Group={group}')
         else:
             bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day())]}')
-            print(f'Group={group}')
-
 
 @bot.message_handler(commands=['change'])
 def change(message):

@@ -1,7 +1,8 @@
 import telebot
 import datetime
 import pprint
-from telebot import types
+import json
+
 
 bot = telebot.TeleBot('5688159206:AAFxbhxdHY9WUiX3q424abv_pOLwK-bgTvY')
 pprint.pprint('ok')
@@ -26,31 +27,13 @@ def day():
 
 day()
 
-text0 = [1, 1,
-         1, 1, ]
-text1 = [1, 1,
-         1, 1, ]
-for i in range(4):
-    text0[i] = [f'{i}'] * 7  # type: ignore #   пустой массив 4х7
-    text1[i] = [f'{i}'] * 7  # type: ignore
 
-#   pprint.pprint(text)
-# Чтение расписания из файлов и заполненние массива
-fls = [11, 12, 21, 22]
-i = 0
-for i in range(4):
-    for j in range(7):
-        f = open(f'data/{fls[i]}/{j + 1}.txt', 'r', encoding="utf-8")
-        text0[i][j] = f.read()  # type: ignore
-        #   print(f'i={i} j={j} file={text0[i][j]}')
-        f.close()
-        f = open(f'data/{fls[i]}/{j + 1}1.txt', 'r', encoding="utf-8")
-        text1[i][j] = f.read()  # type: ignore
-        #   print(f'i={i} j={j} file={text1[i][j]}')
-        f.close()
 
-pprint.pprint(text0)
-pprint.pprint(text1)
+with open("data_file.json", "r") as read_file:
+    data = json.load(read_file)
+
+
+
 
 
 

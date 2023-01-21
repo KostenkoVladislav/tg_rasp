@@ -1,21 +1,17 @@
 import telebot
-
+import sys
+from telebot import types
 import datetime
 import pprint
 import json
+from configuration import *
 
-
-bot = telebot.TeleBot('5688159206:AAFxbhxdHY9WUiX3q424abv_pOLwK-bgTvY')
+bot = telebot.TeleBot(mconf())
 pprint.pprint('ok')
-
 Migalka = 0  # 1- числитель
 group = -1
-
-def adm(id):
-    bot.send_message(759333833, f'Hey, new start user.\n Id= {id}')
-
-
-
+def adm(iid):
+    bot.send_message(759333833, f'Hey, new start user.\n Id= {iid}')
 # 0- знаменатель
 #   Порядковый номер дня недели-сегодня
 def day():
@@ -26,20 +22,21 @@ def day():
     return dt_string
 
 
-day()
+with open("data/data_file.json", "r") as read_file:
+    global data = json.load(read_file)
 
 
 
-with open("data_file.json", "r") as read_file:
-    data = json.load(read_file)
+@bot.message_handler(commands=['stop'])
+def stop(message):
+    if message.from_user.id == 759333833:
+        bot.send_message(message.from_user.id, 'Жаль')
+        sys.exit()
+    else:
+        bot.send_message(message.from_user.id, 'А тебе нельзя')
 
 
-
-
-
-
-@bot.message_handler(commands = ['start'])
-
+@bot.message_handler(commands=['start'])
 # start и инициализация кнопок под сообщением
 def start_message(message):
     adm(message.chat.username)
@@ -81,17 +78,20 @@ def callback_worker(call):
 
 @bot.message_handler(commands=['today'])
 def today(commands):
+    day()
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("today")
         if Migalka == 1:
-            bot.send_message(commands.from_user.id, f'{text0[group][int(day()) - 1]}')
+            bot.send_message(commands.from_user.id, f'{text0[group][int(day()) - 1]}{datetime.datetime.now()}')
         else:
-            bot.send_message(commands.from_user.id, f'{text1[group][int(day()) - 1]}')
+            bot.send_message(commands.from_user.id, f'{text1[group][int(day()) - 1]}{datetime.datetime.now()}')
+
 
 @bot.message_handler(commands=['week'])
 def today(commands):
+    day()
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
@@ -103,8 +103,10 @@ def today(commands):
             for ii in range(7):
                 bot.send_message(commands.from_user.id, f'{text1[group][ii]}')
 
+
 @bot.message_handler(commands=['next_week'])
 def today(commands):
+    day()
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
@@ -116,8 +118,10 @@ def today(commands):
             for ii in range(7):
                 bot.send_message(commands.from_user.id, f'{text1[group][ii]}')
 
+
 @bot.message_handler(commands=['tomorrow'])
 def tomorrow(commands):
+    day()
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
@@ -126,6 +130,7 @@ def tomorrow(commands):
             bot.send_message(commands.from_user.id, f'nice\n{text0[group][int(day())]}')
         else:
             bot.send_message(commands.from_user.id, f'nice\n{text1[group][int(day())]}')
+
 
 @bot.message_handler(commands=['change'])
 def change(message):

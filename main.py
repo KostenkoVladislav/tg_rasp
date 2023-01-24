@@ -4,11 +4,17 @@ import datetime
 import pprint
 import json
 from configuration import *
+from read_write_weather import *
+import threading
 
 bot = telebot.TeleBot(mconf())
 pprint.pprint('ok')
 Migalka = 0  # 1- числитель
 group = -1
+
+
+##def check_wth_time():
+##    if
 
 
 def adm(iid):
@@ -17,7 +23,7 @@ def adm(iid):
     #   Порядковый номер дня недели-сегодня
 
 
-def day():
+def day_str():
     global Migalka
     dt_obj = datetime.datetime.now()
     dt_string = dt_obj.strftime("%w")
@@ -75,9 +81,10 @@ def start_message(message):
     keyboard.add(key_19_03)
     bot.send_message(message.from_user.id, 'Привет, я буду твоим помощником в учёбе. Какое расписание тебе нужно?',
                      reply_markup=keyboard)
+    bot.register_next_step_handler(callback_worker)
 
 
-@bot.callback_query_handler(func=lambda call: True)  # присвоение группы
+##  @bot.callback_query_handler(func=lambda call: True)  # присвоение группы
 def callback_worker(call):
     global group
     if call.data == "1-1":
@@ -104,18 +111,18 @@ def callback_worker(call):
 
 @bot.message_handler(commands=['today'])
 def today(commands):
-    day()
+    day_str()
 
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("today")
-        bot.send_message(commands.from_user.id, f'{data[group][Migalka][day()]}\n\n{datetime.datetime.now()}')
+        bot.send_message(commands.from_user.id, f'{data[group][Migalka][day_str()]}')
 
 
 @bot.message_handler(commands=['week'])
-def today(commands):
-    day()
+def week(commands):
+    day_str()
     if group == -1:
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
@@ -125,8 +132,8 @@ def today(commands):
 
 
 @bot.message_handler(commands=['next_week'])
-def today(commands):
-    day()
+def next_week(commands):
+    day_str()
 
     if Migalka == '1':
         next_week_count = '0'
@@ -148,7 +155,18 @@ def tomorrow(commands):
         bot.send_message(commands.from_user.id, 'Запусти команду /start')
     else:
         print("tomorrow")
-        bot.send_message(commands.from_user.id, f'{data[group][str(Migalka)][tomorrow_str()]}\n\n{datetime.datetime.now()}')
+        bot.send_message(commands.from_user.id, f'{data[group][str(Migalka)][tomorrow_str()]}')
+
+
+@bot.message_handler(commands=['edit_weather'])
+def edit_weather(commands):
+    if weather_file('c') == commands.from_user.id:
+        bot.send_message(commands.from_user.id, f'Уведомления работают')
+    else:
+        bot.send_message(commands.from_user.id, f'В какое время присылать уведомления ?\n(Краснодар)')
+
+
+
 
 
 @bot.message_handler(content_types=['text'])

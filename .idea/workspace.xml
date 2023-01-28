@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd3ba0e-dccf-479e-a373-1b1e9dd10b27" name="Changes" comment="release alpha 0.1&#10;&#10;function is working. &#10;Need to write text">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tg_rasp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tg_rasp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/11.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/21.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/21.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/31.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/31.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/41.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/41.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/51.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/51.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/61.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/61.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/7.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11/71.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/11/71.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2JBRokjimmnbwIqXUR4cNarxE9U" />
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -41,12 +32,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

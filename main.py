@@ -113,9 +113,6 @@ def callback_worker(call):
 		bot.send_message(call.message.chat.id, f'ок, ты в ЮФ{call.data}')
 		print(f"ЮФ1903, id={call.message.chat.username}")
 		group = '4'
-	elif call.data == "yes_edit_weather":
-		edit_weather(commands = ['edit_weather'])
-
 
 
 @bot.message_handler(commands=['today'])
@@ -169,15 +166,24 @@ def tomorrow(commands):
 
 @bot.message_handler(commands=['edit_weather'])
 def edit_weather(commands):
-	if weather_file('c') == commands.from_user.id:
-		mesg = bot.send_message(commands.from_user.id, f'Уведомления работают. Хотите их отключить?')
+	if weather_file('c', commands.from_user.id):
+		msg = bot.send_message(commands.from_user.id, f'Уведомления включены. Хотите их отключить?\n(Да/нет)')
+		bot.register_next_step_handler(msg, answer_weather)
 	else:
-		mesg = bot.send_message(commands.from_user.id, f'В какое время присылать уведомления ?\n(Краснодар)')
-	bot.register_next_step_handler(mesg, test)
+		msg = bot.send_message(commands.from_user.id, f'Уведомления отключены. Хотите их включить?\n(Да/нет)')
+		bot.register_next_step_handler(msg, answer_weather1)
 
-def test(message):
-	bot.send_message(message.chat.id, 'You send me message')
 
+def answer_weather(msg):
+	if msg.text == 'ДА' or msg.text == 'Да' or msg.text == 'да' or msg.text == 'дА':
+		weather_file('d', msg.chat.id)
+		bot.send_message(msg.chat.id, 'Уведомления отключены.')
+
+
+def answer_weather1(msg):
+	if msg.text == 'ДА' or msg.text == 'Да' or msg.text == 'да' or msg.text == 'дА':
+		weather_file('a', msg.chat.id)
+		bot.send_message(msg.chat.id, 'Уведомления включены.')
 
 
 @bot.message_handler(content_types=['text'])

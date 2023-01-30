@@ -14,20 +14,21 @@ group = -1
 time_tgid = {}  # словарь:айди в тг-время напоминания
 
 
-def check_wth_time():   # функция проверки времени и отправки сообщений пользователю с актуальной погодой
+def check_wth_time():  # функция проверки времени и отправки сообщений пользователю с актуальной погодой
 	global time_tgid
 	now = datetime.now()
 	current_time = str(now.strftime("%H:%M"))
 	for key, value in time_tgid.items():
 		if current_time == value:
-			bot.send_message(key,'А это погода')
-
+			bot.send_message(key, 'А это погода')
 
 
 def adm(iid):
 	bot.send_message(759333833, f'Hey, new start user.\n Id= {iid}')
-	# 0- знаменатель
-	#   Порядковый номер дня недели-сегодня
+
+
+# 0- знаменатель
+#   Порядковый номер дня недели-сегодня
 
 
 def day_str():
@@ -87,7 +88,7 @@ def start_message(message):
 	key_19_03 = types.InlineKeyboardButton(text='ЮФ-1903', callback_data='1903')
 	keyboard.add(key_19_03)
 	bot.send_message(message.from_user.id, 'Привет, я буду твоим помощником в учёбе. Какое расписание тебе нужно?',
-					reply_markup=keyboard)
+	                 reply_markup=keyboard)
 
 
 @bot.callback_query_handler(func=lambda call: True)  # присвоение группы
@@ -123,7 +124,7 @@ def today(commands):
 		bot.send_message(commands.from_user.id, 'Запусти команду /start')
 	else:
 		print("today")
-		bot.send_message(commands.from_user.id, f'{data[group][Migalka][day_str()]}')
+		bot.send_message(commands.from_user.id, f'{data[group][Migalka][day_str()]}', parse_mode="html")
 
 
 @bot.message_handler(commands=['week'])
@@ -134,7 +135,7 @@ def week(commands):
 	else:
 		print("week")
 		for i in range(7):
-			bot.send_message(commands.from_user.id, f'{data[group][Migalka][str(i)]}')
+			bot.send_message(commands.from_user.id, f'{data[group][Migalka][str(i)]}', parse_mode="html")
 
 
 @bot.message_handler(commands=['next_week'])
@@ -151,7 +152,7 @@ def next_week(commands):
 	else:
 		print("next_week")
 		for i in range(7):
-			bot.send_message(commands.from_user.id, f'{data[group][next_week_count][str(i)]}')
+			bot.send_message(commands.from_user.id, f'{data[group][next_week_count][str(i)]}', parse_mode="html")
 
 
 @bot.message_handler(commands=['tomorrow'])
@@ -161,7 +162,7 @@ def tomorrow(commands):
 		bot.send_message(commands.from_user.id, 'Запусти команду /start')
 	else:
 		print("tomorrow")
-		bot.send_message(commands.from_user.id, f'{data[group][str(Migalka)][tomorrow_str()]}')
+		bot.send_message(commands.from_user.id, f'{data[group][str(Migalka)][tomorrow_str()]}', parse_mode="html")
 
 
 @bot.message_handler(commands=['edit_weather'])

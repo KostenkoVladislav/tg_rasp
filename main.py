@@ -11,27 +11,26 @@ bot = telebot.TeleBot(mconf())
 pprint.pprint('ok')
 Migalka = 0  # 1- числитель
 group = -1
-time_tgid = {}  # словарь:айди в тг-время напоминания
+time_tgid = []  # список тг айди для напоминания о погоде
+time_weather = '8:00'
 
 
-def check_wth_time():  # функция проверки времени и отправки сообщений пользователю с актуальной погодой
+def check_wth_time():
+	# функция проверки времени и отправки сообщений пользователям с актуальной погодой
+	# (только для пользователей, подписавшихся на уведомления через команду /edit_weather
 	global time_tgid
 	now = datetime.now()
 	current_time = str(now.strftime("%H:%M"))
-	for key, value in time_tgid.items():
-		if current_time == value:
-			bot.send_message(key, 'А это погода')
+
 
 
 def adm(iid):
 	bot.send_message(759333833, f'Hey, new start user.\n Id= {iid}')
 
 
-# 0- знаменатель
-#   Порядковый номер дня недели-сегодня
-
-
 def day_str():
+	# Определение дня недели(сегодня)(пн-вс), в str 0-6. и
+	# присваивание значения переменной Мигалка(числитель/знаменатель)
 	global Migalka
 	dt_obj = datetime.datetime.now()
 	dt_string = dt_obj.strftime("%w")
@@ -44,6 +43,8 @@ def day_str():
 
 
 def tomorrow_str():
+	# Определение дня недели(завтра)(пн-вс), в str 0-6. и
+	# присваивание значения переменной Мигалка(числитель/знаменатель)
 	global Migalka
 	dt_obj = datetime.datetime.now()
 	dt_string = dt_obj.strftime("%w")

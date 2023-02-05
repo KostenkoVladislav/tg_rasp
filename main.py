@@ -7,7 +7,7 @@ from configuration import *
 from read_write_weather import *
 import threading
 
-bot = telebot.TeleBot(mconf())
+bot = telebot.TeleBot(mconf('tg'))
 pprint.pprint('ok')
 Migalka = 0  # 1- числитель
 group = -1

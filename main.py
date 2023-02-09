@@ -6,22 +6,76 @@ import json
 from configuration import *
 from read_write_weather import *
 import threading
+import time
+import requests
 
 bot = telebot.TeleBot(mconf('tg'))
 pprint.pprint('ok')
 Migalka = 0  # 1- числитель
 group = -1
 time_tgid = []  # список тг айди для напоминания о погоде
-time_weather = '8:00'
+time_weather = '07:00'
 
 
-def check_wth_time():
+def weather_send():
+	weather_today = {}
+	try:
+		res = requests.get(
+			'https://api.open-meteo.com/v1/forecast?latitude=45.04&longitude=38.98&hourly=temperature_2m,'
+			'precipitation,windspeed_10m,winddirection_10m&daily=sunrise,sunset&timezone=Europe%2FMoscow')
+		data = res.json()
+		weather_today = {
+			'weather_0': data['hourly']['temperature_2m'][0],
+			'weather_6': data['hourly']['temperature_2m'][6],
+			'weather_9': data['hourly']['temperature_2m'][9],
+			'weather_12': data['hourly']['temperature_2m'][12],
+			'weather_15': data['hourly']['temperature_2m'][15],
+			'weather_18': data['hourly']['temperature_2m'][18],
+			'weather_21': data['hourly']['temperature_2m'][21],
+		}
+
+	except Exception as e:
+		print("Exception (find):", e)
+
+	if len(weather_today) == 0:
+		for i in weather_file('r'):
+			if 100000000 < int(i) < 999999999:
+				bot.send_message(int(i), f'<b>Доброго утра, сорри но погоды сегодня не будет\n'
+				                         f'Сегодня без извинений, так что тыкните @SaMuRa_III</b>')
+		return 0
+
+	for i in weather_file('r'):
+		if 100000000 < int(i) < 999999999:
+			bot.send_message(int(i), f'<b>Доброго утра и прекрасного настроения\n\n</b>'
+			                         f'Погода в славном городе <b>Краснодаре</b> \nпо данным сервиса open-meteo.\n\n'
+			                         f'<b>00:00   </b>{weather_today["weather_0"]} °C\n'
+			                         f'<b>06:00   </b>{weather_today["weather_6"]} °C\n'
+			                         f'<b>09:00   </b>{weather_today["weather_9"]} °C\n'
+			                         f'<b>12:00   </b>{weather_today["weather_12"]} °C\n'
+			                         f'<b>15:00   </b>{weather_today["weather_15"]} °C\n'
+			                         f'<b>18:00   </b>{weather_today["weather_18"]} °C\n'
+			                         f'<b>21:00   </b>{weather_today["weather_21"]} °C\n',
+			                 parse_mode="html")
+
+
+def check_with_time():
+	global time_weather
 	# функция проверки времени и отправки сообщений пользователям с актуальной погодой
 	# (только для пользователей, подписавшихся на уведомления через команду /edit_weather
 	global time_tgid
-	now = datetime.now()
-	current_time = str(now.strftime("%H:%M"))
+	while True:
+		now = datetime.datetime.now()
+		current_time = str(now.strftime("%H:%M"))
+		print(current_time)
+		if current_time == time_weather:
+			weather_send()
+			time.sleep(61)
+		else:
+			time.sleep(45)
 
+
+t = threading.Thread(target=check_with_time)
+t.start()
 
 
 def adm(iid):
